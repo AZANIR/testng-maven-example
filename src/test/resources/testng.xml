@@ -6,4 +6,29 @@
             <class name="com.example.demo.TodoPageTest"/>
         </classes>
     </test>
+    <test name="API Tests">
+        <classes>
+            <class name="com.example.demo.ApiTestSuite"/>
+        </classes>
+    </test>
+    <test name="Integration Tests">
+        <classes>
+            <class name="com.example.demo.IntegrationTestSuite"/>
+        </classes>
+    </test>
+    <test name="Performance Tests">
+        <classes>
+            <class name="com.example.demo.PerformanceTestSuite"/>
+        </classes>
+    </test>
+    <test name="Security Tests">
+        <classes>
+            <class name="com.example.demo.SecurityTestSuite"/>
+        </classes>
+    </test>
+    <test name="UI Tests">
+        <classes>
+            <class name="com.example.demo.UiTestSuite"/>
+        </classes>
+    </test>
 </suite> 
