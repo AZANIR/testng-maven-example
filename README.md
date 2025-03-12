@@ -1,6 +1,6 @@
-# TestNG Maven Example
+# TestNG Maven Example with Testomatio Reporter
 
-A demonstration project for web application test automation using Java, TestNG, and Selenium WebDriver.
+This project demonstrates the integration of [Testomatio Reporter](https://github.com/testomatio/java-reporter) with TestNG tests.
 
 ## Project Description
 
@@ -44,13 +44,67 @@ The project demonstrates test automation for the following TODO application feat
 3. Deleting a task
 4. Working with multiple tasks
 
+## Prerequisites
+
+- Java 11 or higher
+- Maven
+- Chrome browser
+- Testomatio account and API key
+
+## Setup
+
+1. Clone this repository
+2. Update the API key in `run_tests.sh` or `run_tests.bat` with your Testomatio API key
+3. Update the `testomatio.properties` file in `src/test/resources` with your project details
+
 ## Running Tests
 
-To run the tests, execute the following command:
+### On Linux/Mac:
 
 ```bash
-mvn clean test
+chmod +x run_tests.sh
+./run_tests.sh
 ```
+
+### On Windows:
+
+```bash
+run_tests.bat
+```
+
+## Testomatio Integration
+
+This project uses the following Testomatio features:
+
+1. **Test Reporting**: All test results are reported to Testomatio platform
+2. **Test Case Mapping**: Tests are mapped to Testomatio test cases using `@TID` annotations
+3. **Step Reporting**: Test steps are reported using `@Step` annotations
+
+## Configuration
+
+The Testomatio configuration is stored in `src/test/resources/testomatio.properties`:
+
+```properties
+testomatio.host=https://beta.testomat.io
+testomatio.project=testng-maven-example
+testomatio.reporter.interval=2000
+```
+
+## Adding New Tests
+
+When adding new tests:
+
+1. Add the `@TID` annotation with a unique test ID
+2. Break down the test into steps using the `@Step` annotation
+3. Run the tests to see the results in Testomatio dashboard
+
+## Troubleshooting
+
+If you encounter issues with the Testomatio integration:
+
+1. Verify your API key is correct
+2. Check the `testomatio.properties` file for correct configuration
+3. Ensure the TestListener is properly registered in the testng.xml file
 
 ## Requirements
 
