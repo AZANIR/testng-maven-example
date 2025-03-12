@@ -10,74 +10,80 @@ import java.util.List;
 public class TodoPageTest extends BaseTest {
     
     private TodoPage todoPage;
-    private final String TODO_APP_URL = "https://todomvc.com/examples/vanillajs/";
+    private final String TODO_APP_URL = "https://todomvc.com/examples/react/dist/";
     
     @BeforeMethod
     public void setUpPage() {
         todoPage = new TodoPage(driver);
         todoPage.navigateTo(TODO_APP_URL);
+        
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     
     @Test
     public void testAddTodo() {
-        // Добавляем задачу
-        String todoText = "Купить молоко";
+        // Add a task
+        String todoText = "Buy milk";
         todoPage.addTodo(todoText);
         
-        // Проверяем, что задача добавлена
+        // Check that the task is added
         List<WebElement> todoItems = todoPage.getTodoItems();
-        Assert.assertEquals(todoItems.size(), 1, "Должна быть добавлена одна задача");
-        Assert.assertEquals(todoPage.getTodoText(todoItems.get(0)), todoText, "Текст задачи должен совпадать");
+        Assert.assertEquals(todoItems.size(), 1, "One task should be added");
+        Assert.assertEquals(todoPage.getTodoText(todoItems.get(0)), todoText, "Task text should match");
     }
     
     @Test
     public void testToggleTodo() {
-        // Добавляем задачу
-        todoPage.addTodo("Задача для переключения");
+        // Add a task
+        todoPage.addTodo("Task for toggling");
         
-        // Переключаем статус задачи
+        // Toggle task status
         todoPage.toggleTodo(0);
         
-        // Проверяем, что задача отмечена как выполненная
-        Assert.assertTrue(todoPage.isTodoCompleted(0), "Задача должна быть отмечена как выполненная");
+        // Check that the task is marked as completed
+        Assert.assertTrue(todoPage.isTodoCompleted(0), "Task should be marked as completed");
     }
     
     @Test
     public void testDeleteTodo() {
-        // Добавляем задачу
-        todoPage.addTodo("Задача для удаления");
+        // Add a task
+        todoPage.addTodo("Task for deletion");
         
-        // Проверяем, что задача добавлена
-        Assert.assertEquals(todoPage.getTodoItems().size(), 1, "Должна быть добавлена одна задача");
+        // Check that the task is added
+        Assert.assertEquals(todoPage.getTodoItems().size(), 1, "One task should be added");
         
-        // Удаляем задачу
+        // Delete the task
         todoPage.deleteTodo(0);
         
-        // Проверяем, что задача удалена
-        Assert.assertEquals(todoPage.getTodoItems().size(), 0, "Задача должна быть удалена");
+        // Check that the task is deleted
+        Assert.assertEquals(todoPage.getTodoItems().size(), 0, "Task should be deleted");
     }
     
     @Test
     public void testMultipleTodos() {
-        // Добавляем несколько задач
-        todoPage.addTodo("Задача 1");
-        todoPage.addTodo("Задача 2");
-        todoPage.addTodo("Задача 3");
+        // Add multiple tasks
+        todoPage.addTodo("Task 1");
+        todoPage.addTodo("Task 2");
+        todoPage.addTodo("Task 3");
         
-        // Проверяем, что все задачи добавлены
+        // Check that all tasks are added
         List<WebElement> todoItems = todoPage.getTodoItems();
-        Assert.assertEquals(todoItems.size(), 3, "Должно быть добавлено три задачи");
+        Assert.assertEquals(todoItems.size(), 3, "Three tasks should be added");
         
-        // Отмечаем первую и третью задачи как выполненные
+        // Mark first and third tasks as completed
         todoPage.toggleTodo(0);
         todoPage.toggleTodo(2);
         
-        // Проверяем статусы задач
-        Assert.assertTrue(todoPage.isTodoCompleted(0), "Первая задача должна быть отмечена как выполненная");
-        Assert.assertFalse(todoPage.isTodoCompleted(1), "Вторая задача не должна быть отмечена как выполненная");
-        Assert.assertTrue(todoPage.isTodoCompleted(2), "Третья задача должна быть отмечена как выполненная");
+        // Check task statuses
+        Assert.assertTrue(todoPage.isTodoCompleted(0), "First task should be marked as completed");
+        Assert.assertFalse(todoPage.isTodoCompleted(1), "Second task should not be marked as completed");
+        Assert.assertTrue(todoPage.isTodoCompleted(2), "Third task should be marked as completed");
         
-        // Проверяем счетчик оставшихся задач
-        Assert.assertEquals(todoPage.getRemainingCount(), 1, "Должна остаться одна невыполненная задача");
+        // Check remaining tasks counter
+        Assert.assertEquals(todoPage.getRemainingCount(), 1, "One uncompleted task should remain");
     }
 } 
