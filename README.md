@@ -1,10 +1,10 @@
 # TestNG Maven Example
 
-Демонстрационный проект для автоматизации тестирования веб-приложений с использованием Java, TestNG и Selenium WebDriver.
+A demonstration project for web application test automation using Java, TestNG, and Selenium WebDriver.
 
-## Описание проекта
+## Project Description
 
-Этот проект представляет собой пример автоматизации тестирования веб-приложения TODO List с использованием следующих технологий:
+This project is an example of test automation for a TODO List web application using the following technologies:
 
 - Java 11
 - Maven
@@ -12,7 +12,7 @@
 - Selenium WebDriver
 - WebDriverManager
 
-## Структура проекта
+## Project Structure
 
 ```
 testng-maven-example/
@@ -28,46 +28,46 @@ testng-maven-example/
 │       │   └── com/
 │       │       └── example/
 │       │           └── demo/
-│   │               ├── BaseTest.java
-│   │               └── TodoPageTest.java
-│   └── resources/
-│       └── testng.xml
+│       │               ├── BaseTest.java
+│       │               └── TodoPageTest.java
+│       └── resources/
+│           └── testng.xml
 └── pom.xml
 ```
 
-## Функциональность
+## Functionality
 
-Проект демонстрирует автоматизацию тестирования следующих функций TODO приложения:
+The project demonstrates test automation for the following TODO application features:
 
-1. Добавление новой задачи
-2. Отметка задачи как выполненной
-3. Удаление задачи
-4. Работа с несколькими задачами
+1. Adding a new task
+2. Marking a task as completed
+3. Deleting a task
+4. Working with multiple tasks
 
-## Запуск тестов
+## Running Tests
 
-Для запуска тестов выполните следующую команду:
+To run the tests, execute the following command:
 
 ```bash
 mvn clean test
 ```
 
-## Требования
+## Requirements
 
-- Java 11 или выше
-- Maven 3.6.0 или выше
-- Подключение к интернету (для загрузки драйверов браузера)
+- Java 11 or higher
+- Maven 3.6.0 or higher
+- Internet connection (for downloading browser drivers)
 
-## Дополнительная информация
+## Additional Information
 
-Тесты запускаются в headless режиме Chrome. Для изменения настроек браузера отредактируйте класс `BaseTest.java`.
+Tests run in Chrome headless mode. To change browser settings, edit the `BaseTest.java` class.
 
-## Дальнейшее развитие
+## Future Development
 
-Возможные направления для расширения проекта:
+Possible directions for expanding the project:
 
-- Добавление отчетов Allure
-- Параллельное выполнение тестов
-- Добавление поддержки других браузеров
-- Реализация паттерна Page Object Model для более сложных приложений
-- Интеграция с CI/CD системами 
+- Adding Allure reports
+- Parallel test execution
+- Adding support for other browsers
+- Implementing the Page Object Model pattern for more complex applications
+- Integration with CI/CD systems 
