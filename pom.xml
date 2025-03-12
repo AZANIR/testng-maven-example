@@ -17,6 +17,7 @@
         <webdrivermanager.version>5.6.3</webdrivermanager.version>
         <slf4j.version>2.0.9</slf4j.version>
         <rest-assured.version>5.3.2</rest-assured.version>
+        <testomatio.version>0.4.1</testomatio.version>
     </properties>
 
     <dependencies>
@@ -47,6 +48,13 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>${rest-assured.version}</version>
+        </dependency>
+        
+        <!-- Testomatio Reporter -->
+        <dependency>
+            <groupId>io.testomat</groupId>
+            <artifactId>testomatio-testng</artifactId>
+            <version>${testomatio.version}</version>
         </dependency>
         
         <!-- SLF4J API -->
