@@ -1,6 +1,6 @@
 # TestNG Maven Example with Testomatio Reporter
 
-This project demonstrates the integration of [Testomatio Reporter](https://github.com/testomatio/java-reporter) with TestNG tests.
+This project demonstrates the integration of a Testomatio-like reporting system with TestNG tests.
 
 ## Project Description
 
@@ -22,16 +22,22 @@ testng-maven-example/
 │   │       └── com/
 │   │           └── example/
 │   │               └── demo/
-│   │                   └── TodoPage.java
+│   │                   ├── TodoPage.java
+│   │                   └── testomatio/
+│   │                       ├── Step.java
+│   │                       ├── TID.java
+│   │                       └── TestomatioListener.java
 │   └── test/
 │       ├── java/
 │       │   └── com/
 │       │       └── example/
 │       │           └── demo/
 │       │               ├── BaseTest.java
+│       │               ├── TestListener.java
 │       │               └── TodoPageTest.java
 │       └── resources/
-│           └── testng.xml
+│           ├── testng.xml
+│           └── testomatio.properties
 └── pom.xml
 ```
 
@@ -49,15 +55,16 @@ The project demonstrates test automation for the following TODO application feat
 - Java 11 or higher
 - Maven
 - Chrome browser
-- Testomatio account and API key
 
 ## Setup
 
 1. Clone this repository
-2. Update the API key in `run_tests.sh` or `run_tests.bat` with your Testomatio API key
-3. Update the `testomatio.properties` file in `src/test/resources` with your project details
+2. Update the API key in `run_tests.sh` or `run_tests.bat` with your Testomatio API key (if you have one)
+3. Update the `testomatio.properties` file in `src/test/resources` with your project details (if needed)
 
 ## Running Tests
+
+Don't forget to set in the system environment variable TESTOMATIO_API_KEY with your Testomatio API key or add it to the `run_tests.sh` or `run_tests.bat` file
 
 ### On Linux/Mac:
 
@@ -72,12 +79,12 @@ chmod +x run_tests.sh
 run_tests.bat
 ```
 
-## Testomatio Integration
+## Testomatio-like Integration
 
-This project uses the following Testomatio features:
+This project uses a simplified version of Testomatio-like features:
 
-1. **Test Reporting**: All test results are reported to Testomatio platform
-2. **Test Case Mapping**: Tests are mapped to Testomatio test cases using `@TID` annotations
+1. **Test Reporting**: All test results are reported to the console with Testomatio-like formatting
+2. **Test Case Mapping**: Tests are mapped to test cases using `@TID` annotations
 3. **Step Reporting**: Test steps are reported using `@Step` annotations
 
 ## Configuration
@@ -96,14 +103,14 @@ When adding new tests:
 
 1. Add the `@TID` annotation with a unique test ID
 2. Break down the test into steps using the `@Step` annotation
-3. Run the tests to see the results in Testomatio dashboard
+3. Run the tests to see the results in the console
 
 ## Troubleshooting
 
-If you encounter issues with the Testomatio integration:
+If you encounter issues with the test execution:
 
-1. Verify your API key is correct
-2. Check the `testomatio.properties` file for correct configuration
+1. Check that Chrome browser is installed
+2. Verify that WebDriverManager can download the correct driver
 3. Ensure the TestListener is properly registered in the testng.xml file
 
 ## Requirements
@@ -120,8 +127,8 @@ Tests run in Chrome headless mode. To change browser settings, edit the `BaseTes
 
 Possible directions for expanding the project:
 
-- Adding Allure reports
 - Parallel test execution
 - Adding support for other browsers
 - Implementing the Page Object Model pattern for more complex applications
-- Integration with CI/CD systems 
+- Integration with CI/CD systems
+- Integration with the real Testomatio platform 

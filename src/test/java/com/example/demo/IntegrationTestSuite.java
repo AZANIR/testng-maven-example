@@ -1,5 +1,6 @@
 package com.example.demo;
-
+import io.testomat.annotation.TID;  
+import io.testomat.annotation.Step;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -43,29 +44,29 @@ public class IntegrationTestSuite {
         
         petId = response.jsonPath().getLong("id");
     }
-
+    @Step
     private void logStep(String message) {
         System.out.println("[TEST] Step: " + message);
     }
-
+    @Step
     private void logInfo(String message) {
         System.out.println("[TEST] Info: " + message);
     }
-
+    @Step
     private void logError(String message) {
         System.out.println("[TEST] Error: " + message);
     }
-
+    @Step
     private void addKeyValue(String key, String value) {
         keyValues.put(key, value);
         System.out.println("[TEST] Key-Value: " + key + " = " + value);
     }
-
+    @Step
     private void addMetadata(String key, String value) {
         metadata.put(key, value);
         System.out.println("[TEST] Metadata: " + key + " = " + value);
     }
-
+    @Step
     private void logResponse(Response response, String testName) {
         System.out.println("[TEST] Response for " + testName + ":");
         System.out.println("[TEST] Status Code: " + response.getStatusCode());
@@ -73,6 +74,7 @@ public class IntegrationTestSuite {
     }
 
     @Test
+    @TID("fae43e44")
     public void createPetAndOrderTest() {
         logStep("Starting create pet and order integration test");
         addKeyValue("test_type", "integration");
@@ -120,6 +122,7 @@ public class IntegrationTestSuite {
     }
 
     @Test
+    @TID("8b214fc3")
     public void randomOrderStatusTest() {
         logStep("Starting random order status test");
         addKeyValue("test_type", "integration_random");
@@ -170,6 +173,7 @@ public class IntegrationTestSuite {
     }
 
     @Test
+    @TID("cf02220f")
     public void randomResourceCleanupTest() {
         logStep("Starting random resource cleanup test");
         addKeyValue("test_type", "integration_cleanup");
@@ -220,6 +224,7 @@ public class IntegrationTestSuite {
     }
 
     @Test
+    @TID("6c27cd85")
     public void deleteOrderAndPetTest() {
         logStep("Starting delete order and pet test");
         addKeyValue("test_type", "integration_delete");

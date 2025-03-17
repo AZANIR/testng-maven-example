@@ -56,3 +56,8 @@ buildNumber.properties
 Thumbs.db
 ehthumbs.db
 Desktop.ini 
+
+test-output/
+allure-results/
+.env
+

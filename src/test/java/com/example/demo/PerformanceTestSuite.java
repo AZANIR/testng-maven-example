@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import io.testomat.annotation.TID;
+import io.testomat.annotation.Step;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -46,29 +48,29 @@ public class PerformanceTestSuite {
         
         petId = response.jsonPath().getLong("id");
     }
-
+    @Step
     private void logStep(String message) {
         System.out.println("[TEST] Step: " + message);
     }
-
+    @Step
     private void logInfo(String message) {
         System.out.println("[TEST] Info: " + message);
     }
-
+    @Step
     private void logError(String message) {
         System.out.println("[TEST] Error: " + message);
     }
-
+    @Step
     private void addKeyValue(String key, String value) {
         keyValues.put(key, value);
         System.out.println("[TEST] Key-Value: " + key + " = " + value);
     }
-
+    @Step
     private void addMetadata(String key, String value) {
         metadata.put(key, value);
         System.out.println("[TEST] Metadata: " + key + " = " + value);
     }
-
+    @Step
     private void logResponse(Response response, String testName) {
         System.out.println("[TEST] Response for " + testName + ":");
         System.out.println("[TEST] Status Code: " + response.getStatusCode());
@@ -76,6 +78,7 @@ public class PerformanceTestSuite {
     }
 
     @Test
+    @TID("763fc198")
     public void responseTimeTest() {
         logStep("Starting response time test");
         addKeyValue("test_type", "performance");
@@ -102,6 +105,7 @@ public class PerformanceTestSuite {
     }
 
     @Test
+    @TID("7eb3f9ae")
     public void randomSlowResponseTest() {
         logStep("Starting random slow response test");
         addKeyValue("test_type", "performance_random");
@@ -132,6 +136,7 @@ public class PerformanceTestSuite {
     }
 
     @Test
+    @TID("92467a35")
     public void concurrentRequestsTest() {
         logStep("Starting concurrent requests test");
         addKeyValue("test_type", "performance_concurrent");
@@ -164,6 +169,7 @@ public class PerformanceTestSuite {
     }
 
     @Test
+    @TID("93a7e82f")
     public void randomHighLoadTest() {
         logStep("Starting random high load test");
         addKeyValue("test_type", "performance_load");
@@ -211,6 +217,7 @@ public class PerformanceTestSuite {
     }
 
     @Test
+    @TID("414bf6dd")
     public void resourceUsageTest() {
         logStep("Starting resource usage test");
         addKeyValue("test_type", "performance_resources");

@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Скрипт для запуска тестов с Testomatio Reporter
+# Script for running tests with Testomatio Reporter
 
-# Установка API ключа Testomatio
-# Замените YOUR_API_KEY на ваш реальный API ключ
-export TESTOMATIO_API_KEY="YOUR_API_KEY"
+# Setting up Testomatio API key (optional)
+# If you have a real Testomatio API key, uncomment the following line and replace YOUR_API_KEY with your key
+# export TESTOMATIO_API_KEY="YOUR_API_KEY"
 
-# Запуск тестов с Maven
+# Running tests with Maven
 mvn clean test
 
-# Вывод сообщения о завершении
-echo "Tests completed. Results reported to Testomatio." 
+# Output completion message
+echo "Tests completed. Results reported to console." 
