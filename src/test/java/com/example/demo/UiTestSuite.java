@@ -1,5 +1,8 @@
 package com.example.demo;
 
+
+import io.testomat.annotation.TID;
+import io.testomat.annotation.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -54,30 +57,29 @@ public class UiTestSuite {
             driver.quit();
         }
     }
-
+    @Step
     private void logStep(String message) {
         System.out.println("[TEST] Step: " + message);
     }
-
+    @Step
     private void logInfo(String message) {
         System.out.println("[TEST] Info: " + message);
     }
-
-    @SuppressWarnings("unused")
+    @Step
     private void logError(String message) {
         System.out.println("[TEST] Error: " + message);
     }
-
+    @Step
     private void addKeyValue(String key, String value) {
         keyValues.put(key, value);
         System.out.println("[TEST] Key-Value: " + key + " = " + value);
     }
-
+    @Step
     private void addMetadata(String key, String value) {
         metadata.put(key, value);
         System.out.println("[TEST] Metadata: " + key + " = " + value);
     }
-
+    @Step
     private void takeScreenshot(String name) {
         try {
             String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
@@ -93,6 +95,7 @@ public class UiTestSuite {
     }
 
     @Test
+    @TID("af6848f3")
     public void successfulLoginTest() {
         logStep("Starting successful login test");
         

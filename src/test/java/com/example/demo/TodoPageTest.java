@@ -1,10 +1,11 @@
 package com.example.demo;
 
+import io.testomat.annotation.Step;
+import io.testomat.annotation.TID;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.util.List;
 
 public class TodoPageTest extends BaseTest {
@@ -25,65 +26,116 @@ public class TodoPageTest extends BaseTest {
     }
     
     @Test
+    @TID("80c3da7c")
     public void testAddTodo() {
         // Add a task
         String todoText = "Buy milk";
-        todoPage.addTodo(todoText);
+        addTodoStep(todoText);
         
         // Check that the task is added
+        verifyTodoAdded(todoText);
+    }
+    
+    private void addTodoStep(String todoText) {
+        todoPage.addTodo(todoText);
+    }
+    
+    private void verifyTodoAdded(String todoText) {
         List<WebElement> todoItems = todoPage.getTodoItems();
         Assert.assertEquals(todoItems.size(), 1, "One task should be added");
         Assert.assertEquals(todoPage.getTodoText(todoItems.get(0)), todoText, "Task text should match");
     }
     
     @Test
+    @TID("a51d3da4")
     public void testToggleTodo() {
         // Add a task
-        todoPage.addTodo("Task for toggling");
+        String todoText = "Task for toggling";
+        addTodoStep(todoText);
         
         // Toggle task status
-        todoPage.toggleTodo(0);
+        toggleTodoStep(0);
         
         // Check that the task is marked as completed
-        Assert.assertTrue(todoPage.isTodoCompleted(0), "Task should be marked as completed");
+        verifyTodoCompleted(0);
+    }
+    
+    private void toggleTodoStep(int index) {
+        todoPage.toggleTodo(index);
+    }
+    
+    private void verifyTodoCompleted(int index) {
+        Assert.assertTrue(todoPage.isTodoCompleted(index), "Task should be marked as completed");
     }
     
     @Test
+    @TID("689dc0c3")
     public void testDeleteTodo() {
         // Add a task
-        todoPage.addTodo("Task for deletion");
+        String todoText = "Task for deletion";
+        addTodoStep(todoText);
         
         // Check that the task is added
-        Assert.assertEquals(todoPage.getTodoItems().size(), 1, "One task should be added");
+        verifyTodoCount(1, "One task should be added");
         
         // Delete the task
-        todoPage.deleteTodo(0);
+        deleteTodoStep(0);
         
         // Check that the task is deleted
-        Assert.assertEquals(todoPage.getTodoItems().size(), 0, "Task should be deleted");
+        verifyTodoCount(0, "Task should be deleted");
+    }
+    
+    private void deleteTodoStep(int index) {
+        todoPage.deleteTodo(index);
+    }
+    
+    private void verifyTodoCount(int expectedCount, String message) {
+        Assert.assertEquals(todoPage.getTodoItems().size(), expectedCount, message);
     }
     
     @Test
+    @TID("678cb8fb")
     public void testMultipleTodos() {
         // Add multiple tasks
+        addMultipleTodosStep();
+
+        // Check that all tasks are added
+        verifyMultipleTodosAdded();
+
+        // Mark first and third tasks as completed
+        toggleMultipleTodosStep();
+
+        // Check task statuses
+        verifyTodoStatuses();
+
+        // Check remaining tasks counter
+        verifyRemainingCount();
+    }
+    
+    @Step
+    private void addMultipleTodosStep() {
         todoPage.addTodo("Task 1");
         todoPage.addTodo("Task 2");
         todoPage.addTodo("Task 3");
-        
-        // Check that all tasks are added
+    }
+    @Step
+    private void verifyMultipleTodosAdded() {
         List<WebElement> todoItems = todoPage.getTodoItems();
         Assert.assertEquals(todoItems.size(), 3, "Three tasks should be added");
-        
-        // Mark first and third tasks as completed
+    }
+    @Step
+    private void toggleMultipleTodosStep() {
         todoPage.toggleTodo(0);
         todoPage.toggleTodo(2);
-        
-        // Check task statuses
+    }
+    @Step
+    private void verifyTodoStatuses() {
         Assert.assertTrue(todoPage.isTodoCompleted(0), "First task should be marked as completed");
         Assert.assertFalse(todoPage.isTodoCompleted(1), "Second task should not be marked as completed");
         Assert.assertTrue(todoPage.isTodoCompleted(2), "Third task should be marked as completed");
-        
-        // Check remaining tasks counter
+    }
+    @Step
+    private void verifyRemainingCount() {
         Assert.assertEquals(todoPage.getRemainingCount(), 1, "One uncompleted task should remain");
     }
 } 

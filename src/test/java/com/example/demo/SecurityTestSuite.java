@@ -1,5 +1,6 @@
 package com.example.demo;
-
+import io.testomat.annotation.TID;
+import io.testomat.annotation.Step;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -42,30 +43,30 @@ public class SecurityTestSuite {
         
         petId = response.jsonPath().getLong("id");
     }
-
+    @Step
     private void logStep(String message) {
         System.out.println("[TEST] Step: " + message);
     }
-
+    @Step
     private void logInfo(String message) {
         System.out.println("[TEST] Info: " + message);
     }
-
+    @Step
     @SuppressWarnings("unused")
     private void logError(String message) {
         System.out.println("[TEST] Error: " + message);
     }
-
+    @Step
     private void addKeyValue(String key, String value) {
         keyValues.put(key, value);
         System.out.println("[TEST] Key-Value: " + key + " = " + value);
     }
-
+    @Step
     private void addMetadata(String key, String value) {
         metadata.put(key, value);
         System.out.println("[TEST] Metadata: " + key + " = " + value);
     }
-
+    @Step
     private void logResponse(Response response, String testName) {
         System.out.println("[TEST] Response for " + testName + ":");
         System.out.println("[TEST] Status Code: " + response.getStatusCode());
@@ -73,6 +74,7 @@ public class SecurityTestSuite {
     }
 
     @Test
+    @TID("cab3f84c")
     public void sqlInjectionTest() {
         logStep("Starting SQL injection test");
         addKeyValue("test_type", "security");
@@ -96,6 +98,7 @@ public class SecurityTestSuite {
     }
 
     @Test
+    @TID("08d289b2")
     public void randomXssAttackTest() {
         logStep("Starting random XSS attack test");
         addKeyValue("test_type", "security_random");
@@ -132,6 +135,7 @@ public class SecurityTestSuite {
     }
 
     @Test
+    @TID("3b9f5570")
     public void authenticationTest() {
         logStep("Starting authentication test");
         addKeyValue("test_type", "security_auth");
@@ -151,6 +155,7 @@ public class SecurityTestSuite {
     }
 
     @Test
+    @TID("fbff164b")
     public void randomInvalidTokenTest() {
         logStep("Starting random invalid token test");
         addKeyValue("test_type", "security_token");
@@ -184,6 +189,7 @@ public class SecurityTestSuite {
     }
 
     @Test
+    @TID("fef5a531")
     public void inputValidationTest() {
         logStep("Starting input validation test");
         addKeyValue("test_type", "security_validation");

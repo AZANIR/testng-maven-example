@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import io.testomat.annotation.TID;
+import io.testomat.annotation.Step;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -40,30 +42,30 @@ public class ApiTestSuite {
         
         petId = response.jsonPath().getLong("id");
     }
-
+    @Step
     private void logStep(String message) {
         System.out.println("[TEST] Step: " + message);
     }
-
+    @Step
     private void logInfo(String message) {
         System.out.println("[TEST] Info: " + message);
     }
-
+    @Step
     @SuppressWarnings("unused")
     private void logError(String message) {
         System.out.println("[TEST] Error: " + message);
     }
-
+    @Step
     private void addKeyValue(String key, String value) {
         keyValues.put(key, value);
         System.out.println("[TEST] Key-Value: " + key + " = " + value);
     }
-
+    @Step
     private void addMetadata(String key, String value) {
         metadata.put(key, value);
         System.out.println("[TEST] Metadata: " + key + " = " + value);
     }
-
+    @Step
     private void logResponse(Response response, String testName) {
         System.out.println("[TEST] Response for " + testName + ":");
         System.out.println("[TEST] Status Code: " + response.getStatusCode());
@@ -71,6 +73,7 @@ public class ApiTestSuite {
     }
 
     @Test
+    @TID("334758cf")
     public void createPetTest() {
         logStep("Starting create pet test");
         
@@ -102,6 +105,7 @@ public class ApiTestSuite {
     }
 
     @Test
+    @TID("6aeb041c")
     public void randomInvalidPetIdTest() {
         logStep("Starting random invalid pet ID test");
         
@@ -136,6 +140,7 @@ public class ApiTestSuite {
     }
 
     @Test
+    @TID("21853548")
     public void updatePetTest() {
         logStep("Starting update pet test");
         
@@ -165,6 +170,7 @@ public class ApiTestSuite {
     }
 
     @Test
+    @TID("63910e58")
     public void findPetsByStatusTest() {
         logStep("Starting find pets by status test");
         
@@ -181,6 +187,7 @@ public class ApiTestSuite {
     }
 
     @Test
+    @TID("09b9092e")
     public void randomInvalidStatusTest() {
         logStep("Starting random invalid status test");
         
