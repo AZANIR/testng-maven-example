@@ -1,4 +1,5 @@
 package com.example.demo;
+import io.testomat.annotation.Step;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -26,13 +27,13 @@ public class TodoPage {
     private final By todoItemDeleteButton = By.className("destroy");
     private final By clearCompletedButton = By.className("clear-completed");
     private final By todoCount = By.className("todo-count");
-    
+
     public TodoPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         this.actions = new Actions(driver);
     }
-    
+    @Step
     public void navigateTo(String url) {
         driver.get(url);
         // Wait until the page is fully loaded
@@ -57,7 +58,7 @@ public class TodoPage {
             System.out.println("Error checking elements: " + e.getMessage());
         }
     }
-    
+    @Step
     public void addTodo(String todoText) {
         try {
             // Wait until the element is visible and clickable
@@ -81,7 +82,7 @@ public class TodoPage {
             e.printStackTrace();
         }
     }
-    
+    @Step
     public List<WebElement> getTodoItems() {
         try {
             // Check for elements before waiting
@@ -100,7 +101,7 @@ public class TodoPage {
             return driver.findElements(todoItems);
         }
     }
-    
+    @Step
     public String getTodoText(WebElement todoItem) {
         try {
             return todoItem.findElement(todoItemLabel).getText();
@@ -109,7 +110,7 @@ public class TodoPage {
             return "";
         }
     }
-    
+    @Step
     public void toggleTodo(int index) {
         try {
             List<WebElement> items = getTodoItems();
@@ -132,7 +133,7 @@ public class TodoPage {
             e.printStackTrace();
         }
     }
-    
+    @Step
     public void deleteTodo(int index) {
         try {
             List<WebElement> items = getTodoItems();
@@ -160,7 +161,7 @@ public class TodoPage {
             e.printStackTrace();
         }
     }
-    
+    @Step
     public void clearCompleted() {
         try {
             if (!driver.findElements(clearCompletedButton).isEmpty()) {
@@ -174,7 +175,7 @@ public class TodoPage {
             System.out.println("Error clearing completed tasks: " + e.getMessage());
         }
     }
-    
+    @Step
     public int getRemainingCount() {
         try {
             if (!driver.findElements(todoCount).isEmpty()) {
@@ -191,7 +192,7 @@ public class TodoPage {
             return 0;
         }
     }
-    
+    @Step
     public boolean isTodoCompleted(int index) {
         try {
             List<WebElement> items = getTodoItems();
